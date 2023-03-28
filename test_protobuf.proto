@@ -1,0 +1,12 @@
+syntax = "proto3";
+package mpb_test;
+
+message test_data {
+  double x1 = 1;
+  double y1 = 2;
+  double z1 = 3;
+  double x2 = 4;
+  double y2 = 5;
+  double z2 = 6;
+  uint32 seq = 7;
+};
