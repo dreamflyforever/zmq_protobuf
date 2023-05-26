@@ -1,5 +1,6 @@
 import time
-
+import google.protobuf
+from test_protobuf_pb2 import *
 import zmq
 
 ctx = zmq.Context()
@@ -18,13 +19,18 @@ url = 'tcp://10.1.9.184:8001'
 client = ctx.socket(zmq.REQ)
 client.connect(url)
 
-for i in range(10):
-    msg = b'request %i' % i
-    logging.debug('send : %s ' % msg)
+c = test_data()
+
+while True:
+    msg = b'request rgbd'
+    logging.debug(msg)
     client.send(msg)
-    reply = client.recv_string()
-    logging.debug('recv %s' % reply)
-    print('client recvd %s' % reply)
+    replay = client.recv()
+    print(replay)
+    c.ParseFromString(replay)
+    parse = str(c)
+    print(parse)
+    logging.debug(parse)
     time.sleep(0.1)
 
 client.close()

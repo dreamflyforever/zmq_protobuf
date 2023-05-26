@@ -2,6 +2,16 @@ import time
 
 import zmq
 import logging
+import google.protobuf
+
+from test_protobuf_pb2 import *
+c = test_data()
+c.x1 = 1
+c.x2 = 2
+c.y1 = 3
+c.y2 = 4
+c.z1 = 5
+c.z2 = 6
 
 # log file
 logging.basicConfig(
@@ -17,14 +27,18 @@ url = 'tcp://*:8001'
 server = ctx.socket(zmq.REP)
 server.bind(url)
 
-for i in range(10):
+msg = c
+serialized_msg = msg.SerializeToString()
+
+while True:
     msg = server.recv(copy=False)
     #print(f'server recvd {msg.bytes!r} from {msg.routing_id!r}')
-    logging.debug('recv %s ' % msg)
+    logging.debug(msg)
     print(msg)
     #server.send_string('reply %i' % i, routing_id=msg.routing_id)
-    logging.debug('send %d' % i)
-    server.send_string('reply %i' % i)
+    logging.debug(serialized_msg)
+    print(serialized_msg)
+    server.send(serialized_msg)
     time.sleep(0.1)
 server.close()
 ctx.term()
