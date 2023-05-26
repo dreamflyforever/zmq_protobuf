@@ -31,12 +31,12 @@ msg = c
 serialized_msg = msg.SerializeToString()
 
 while True:
-    msg = server.recv(copy=False)
+    msg_request = server.recv(copy=False)
     #print(f'server recvd {msg.bytes!r} from {msg.routing_id!r}')
-    logging.debug(msg)
+    logging.debug(msg_request)
     print(msg)
     #server.send_string('reply %i' % i, routing_id=msg.routing_id)
-    logging.debug(serialized_msg)
+    logging.debug(msg)
     print(serialized_msg)
     server.send(serialized_msg)
     time.sleep(0.1)
