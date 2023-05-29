@@ -45,7 +45,7 @@ while True:
     else:
         print('error message %s' % msg_request)
     #server.send_string('reply %i' % i, routing_id=msg.routing_id)
-    logging.debug(msg)
+    logging.debug('\n%s', msg)
     print(serialized_msg)
     server.send(serialized_msg)
     time.sleep(0.1)
