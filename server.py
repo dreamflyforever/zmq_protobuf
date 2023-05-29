@@ -30,11 +30,20 @@ server.bind(url)
 msg = c
 serialized_msg = msg.SerializeToString()
 
+recv = test_data()
+
 while True:
     msg_request = server.recv(copy=False)
-    #print(f'server recvd {msg.bytes!r} from {msg.routing_id!r}')
-    logging.debug(msg_request)
-    print(msg)
+
+    recv.ParseFromString(msg_request)
+    logging.debug(recv.cls)
+    print(type(recv.cls))
+    if recv.cls == 1:
+        print('rgbd request')
+    elif recv.cls == 0:
+        print('fish eye request')
+    else:
+        print('error message %s' % msg_request)
     #server.send_string('reply %i' % i, routing_id=msg.routing_id)
     logging.debug(msg)
     print(serialized_msg)

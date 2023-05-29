@@ -19,16 +19,22 @@ url = 'tcp://10.1.9.184:8001'
 client = ctx.socket(zmq.REQ)
 client.connect(url)
 
-c = test_data()
+send_request = test_data()
+send_request.cls = 1
+msg = send_request
+serialized_send = msg.SerializeToString()
+
+recv = test_data()
 
 while True:
-    msg = b'request rgbd'
-    logging.debug(msg)
-    client.send(msg)
-    replay = client.recv()
-    print(replay)
-    c.ParseFromString(replay)
-    parse = str(c)
+    logging.debug(send_request.cls)
+    client.send(serialized_send)
+
+    reply = client.recv()
+    print(reply)
+
+    recv.ParseFromString(reply)
+    parse = str(recv)
     print(parse)
     logging.debug(parse)
     time.sleep(0.1)
