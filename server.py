@@ -23,12 +23,11 @@ logging.basicConfig(
 )
 
 ctx = zmq.Context()
-url = 'tcp://*:8001'
+url = 'tcp://*:8004'
 server = ctx.socket(zmq.REP)
 server.bind(url)
 
 msg = c
-serialized_msg = msg.SerializeToString()
 
 recv = test_data()
 
@@ -45,6 +44,8 @@ while True:
     else:
         print('error message %s' % msg_request)
     #server.send_string('reply %i' % i, routing_id=msg.routing_id)
+    msg.ts = time.time()
+    serialized_msg = msg.SerializeToString()
     logging.debug('\n%s', msg)
     print(serialized_msg)
     server.send(serialized_msg)

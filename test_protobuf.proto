@@ -9,5 +9,6 @@ message test_data {
   double y2 = 5;
   double z2 = 6;
   uint32 seq = 7;
-  uint32 cls = 8;
+  double ts = 8;  
+  uint32 cls = 9;
 };

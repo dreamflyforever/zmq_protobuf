@@ -15,7 +15,7 @@ logging.basicConfig(
     filemode='a'  # 文件模式，如果设置为'a'则表示追加记录而不是覆盖
 )
 
-url = 'tcp://10.1.9.184:8001'
+url = 'tcp://10.1.3.24:8004'
 client = ctx.socket(zmq.REQ)
 client.connect(url)
 
