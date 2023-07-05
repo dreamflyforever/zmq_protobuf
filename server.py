@@ -4,14 +4,9 @@ import zmq
 import logging
 import google.protobuf
 
-from test_protobuf_pb2 import *
-c = test_data()
-c.x1 = 1
-c.x2 = 2
-c.y1 = 3
-c.y2 = 4
-c.z1 = 5
-c.z2 = 6
+from battery_pb2 import *
+c = Camera2RobotReply()
+c.seq = 5
 
 # log file
 logging.basicConfig(
@@ -29,16 +24,15 @@ server.bind(url)
 
 msg = c
 
-recv = test_data()
+recv = Camera2RobotRequest()
 
 while True:
     msg_request = server.recv(copy=False)
 
     recv.ParseFromString(msg_request)
-    logging.debug(recv.cls)
-    print(type(recv.cls))
-    if recv.cls == 1:
-        print('rgbd request')
+    print(recv.event)
+    if recv.event == 1:
+        print('battery request')
     elif recv.cls == 0:
         print('fish eye request')
     else:
