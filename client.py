@@ -27,14 +27,16 @@ msg = send_request
 serialized_send = msg.SerializeToString()
 
 recv = Camera2RobotReply()
-
+basestation = FindBasestationReply()
 while True:
     client.send(serialized_send)
 
     reply = client.recv()
-    print(reply)
+    #print(reply)
 
     recv.ParseFromString(reply)
+    mark = recv.data
+    mark.Unpack(basestation)
     parse = str(recv)
     print(parse)
     logging.debug(parse)

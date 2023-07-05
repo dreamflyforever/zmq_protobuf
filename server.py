@@ -5,8 +5,21 @@ import logging
 import google.protobuf
 
 from battery_pb2 import *
+from Header_pb2 import *
+
 c = Camera2RobotReply()
 c.seq = 5
+c.error.flag = 100
+
+basestation = FindBasestationReply()
+#basestation.header = 1
+basestation.position.x = 1
+basestation.position.y = 2
+basestation.position.yaw = 3
+basestation.position.confidence = 4
+
+mark = c.data
+mark.Pack(basestation)
 
 # log file
 logging.basicConfig(
@@ -30,10 +43,10 @@ while True:
     msg_request = server.recv(copy=False)
 
     recv.ParseFromString(msg_request)
-    print(recv.event)
-    if recv.event == 1:
+    print(recv)
+    if recv.event == 0:
         print('battery request')
-    elif recv.cls == 0:
+    elif recv.event == 1:
         print('fish eye request')
     else:
         print('error message %s' % msg_request)
@@ -41,7 +54,7 @@ while True:
     msg.ts = time.time()
     serialized_msg = msg.SerializeToString()
     logging.debug('\n%s', msg)
-    print(serialized_msg)
+    #print(serialized_msg)
     server.send(serialized_msg)
     time.sleep(0.1)
 server.close()
