@@ -2,15 +2,14 @@ import zmq
 import sys
 import google.protobuf
 
-from test_protobuf_pb2 import *
-
+from rgbd_repeat_pb2 import *
 context = zmq.Context()
 socket = context.socket(zmq.SUB)
 socket.connect("tcp://0.0.0.0:8003")
 
 socket.setsockopt_string(zmq.SUBSCRIBE, "")
 
-c = test_data()
+c = pose_array()
 
 print(type(c))
 

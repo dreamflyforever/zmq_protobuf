@@ -1,0 +1,21 @@
+syntax = "proto3";
+package mpb_test;
+
+
+//(x1,y1,z1)表示目标(瓶子)相对于深度相机中心点坐标,单位为米;
+//(x2,y2,z2)表示目标(瓶子)相对于底盘中心点坐标,单位为米。
+
+message pose_array{
+  repeated rgbd_pose pose = 1;
+};
+
+message rgbd_pose {
+  double x1 = 1;
+  double y1 = 2;
+  double z1 = 3;
+  double x2 = 4;
+  double y2 = 5;
+  double z2 = 6;
+  uint32 seq = 7;
+  double ts = 8;
+};
