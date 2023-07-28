@@ -8,4 +8,7 @@ protoc --proto_path=. --python_out=. test_protobuf.proto
 run 'python ./zmqsub.py' & 'python ./zmqpub.py'  
 
 ## license
-MIT
+MIT by Jim
+
+## maybe problem
+pip install protobuf==3.20.3

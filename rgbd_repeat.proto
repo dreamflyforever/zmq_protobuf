@@ -1,5 +1,5 @@
 syntax = "proto3";
-package mpb_test;
+package mpb_com;
 
 
 //(x1,y1,z1)表示目标(瓶子)相对于深度相机中心点坐标,单位为米;

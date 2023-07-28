@@ -5,7 +5,7 @@ import google.protobuf
 from rgbd_repeat_pb2 import *
 context = zmq.Context()
 socket = context.socket(zmq.SUB)
-socket.connect("tcp://0.0.0.0:8003")
+socket.connect("tcp://10.1.2.76:8003")
 
 socket.setsockopt_string(zmq.SUBSCRIBE, "")
 

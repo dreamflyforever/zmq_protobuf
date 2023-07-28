@@ -13,15 +13,15 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11rgbd_repeat.proto\x12\x08mpb_test\"/\n\npose_array\x12!\n\x04pose\x18\x01 \x03(\x0b\x32\x13.mpb_test.rgbd_pose\"l\n\trgbd_pose\x12\n\n\x02x1\x18\x01 \x01(\x01\x12\n\n\x02y1\x18\x02 \x01(\x01\x12\n\n\x02z1\x18\x03 \x01(\x01\x12\n\n\x02x2\x18\x04 \x01(\x01\x12\n\n\x02y2\x18\x05 \x01(\x01\x12\n\n\x02z2\x18\x06 \x01(\x01\x12\x0b\n\x03seq\x18\x07 \x01(\r\x12\n\n\x02ts\x18\x08 \x01(\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11rgbd_repeat.proto\x12\x07mpb_com\".\n\npose_array\x12 \n\x04pose\x18\x01 \x03(\x0b\x32\x12.mpb_com.rgbd_pose\"l\n\trgbd_pose\x12\n\n\x02x1\x18\x01 \x01(\x01\x12\n\n\x02y1\x18\x02 \x01(\x01\x12\n\n\x02z1\x18\x03 \x01(\x01\x12\n\n\x02x2\x18\x04 \x01(\x01\x12\n\n\x02y2\x18\x05 \x01(\x01\x12\n\n\x02z2\x18\x06 \x01(\x01\x12\x0b\n\x03seq\x18\x07 \x01(\r\x12\n\n\x02ts\x18\x08 \x01(\x01\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'rgbd_repeat_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _POSE_ARRAY._serialized_start=31
-  _POSE_ARRAY._serialized_end=78
-  _RGBD_POSE._serialized_start=80
-  _RGBD_POSE._serialized_end=188
+  _POSE_ARRAY._serialized_start=30
+  _POSE_ARRAY._serialized_end=76
+  _RGBD_POSE._serialized_start=78
+  _RGBD_POSE._serialized_end=186
 # @@protoc_insertion_point(module_scope)
