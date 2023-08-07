@@ -1,0 +1,29 @@
+// See README.txt for information and build instructions.
+//
+// Note: START and END tags are used in comments to define sections used in
+// tutorials.  They are not part of the syntax for Protocol Buffers.
+//
+// To get an in-depth walkthrough of this file and the related examples, see:
+// https://developers.google.com/protocol-buffers/docs/tutorials
+
+// [START declaration]
+
+syntax = "proto3";
+package mpb_arm_com;
+
+message BottlePoses {
+  uint32 seq = 1;
+  BottlePose left_pose = 2;
+  BottlePose right_pose = 3;
+}
+
+message BottlePose {
+  uint32 seq = 1;
+  double x = 2;
+  double y = 3;
+  double z = 4;
+  double roll = 5;
+  double pitch = 6;
+  double yaw = 7;  
+  int32 data_valid = 8;
+};
