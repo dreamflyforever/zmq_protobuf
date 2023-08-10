@@ -1,6 +1,6 @@
 import time
 import google.protobuf
-from battery_pb2 import *
+from CameraBottle2Robot_pb2 import *
 import zmq
 
 ctx = zmq.Context()
@@ -15,19 +15,19 @@ logging.basicConfig(
     filemode='a' 
 )
 
-url = 'tcp://10.1.3.24:8004'
+url = 'tcp://localhost:8003'
 client = ctx.socket(zmq.REQ)
 client.connect(url)
 
-send_request = Camera2RobotRequest()
+send_request = CameraBottle2RobotRequest()
 send_request.event = 1
 send_request.ts = 2
 send_request.seq = 3
 msg = send_request
 serialized_send = msg.SerializeToString()
 
-recv = Camera2RobotReply()
-basestation = FindBasestationReply()
+recv = CameraBottle2RobotReply()
+basestation = FindBottleReply()
 while True:
     client.send(serialized_send)
 

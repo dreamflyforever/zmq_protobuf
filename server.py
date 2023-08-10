@@ -12,9 +12,6 @@ c = CameraBottle2RobotReply()
 c.seq = 5
 #c.error.flag = 100
 
-basestation = CameraBottle2RobotReply()
-basestation.error.flag = 1
-#basestation.header = 1
 # log file
 logging.basicConfig(
     level=logging.DEBUG,  # 指定日志记录级别为DEBUG及以上
@@ -31,18 +28,21 @@ server.bind(url)
 
 msg = c
 
-recv = Camera2RobotRequest()
+recv = CameraBottle2RobotRequest()
 
 while True:
     c.seq = c.seq + 1
     c.error.flag = True
-    basestation.seq = basestation.seq + 1
-    #basestation.poses.pose.y2 = 2
-    #basestation.poses.pose.ts = 3
-    
+    basestation = FindBottleReply()
+    p = basestation.poses.pose.add()
+    p.x1 = 1
+    p.seq = 100
+    p = basestation.poses.pose.add()
+    p.x2 = 2
+    p.seq = 101
+
     mark = c.data
     mark.Pack(basestation)
-
 
     msg_request = server.recv(copy=False)
 
@@ -58,7 +58,6 @@ while True:
     msg.ts = time.time()
     serialized_msg = msg.SerializeToString()
     logging.debug('\n%s', msg)
-    print(basestation.seq)
     #print(serialized_msg)
     server.send(serialized_msg)
     time.sleep(0.1)
