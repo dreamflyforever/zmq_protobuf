@@ -37,6 +37,7 @@ while True:
     recv.ParseFromString(reply)
     mark = recv.data
     mark.Unpack(basestation)
+    print(str(basestation))
     parse = str(recv)
     print(parse)
     logging.debug(parse)
