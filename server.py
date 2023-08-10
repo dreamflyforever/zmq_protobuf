@@ -4,23 +4,17 @@ import zmq
 import logging
 import google.protobuf
 
-from battery_pb2 import *
+#from battery_pb2 import *
 from Header_pb2 import *
-
-c = Camera2RobotReply()
+from CameraBottle2Robot_pb2 import *
+from Camera2Robot_pb2 import *
+c = CameraBottle2RobotReply()
 c.seq = 5
-c.error.flag = 100
+#c.error.flag = 100
 
-basestation = FindBasestationReply()
+basestation = CameraBottle2RobotReply()
+basestation.error.flag = 1
 #basestation.header = 1
-basestation.position.x = 1
-basestation.position.y = 2
-basestation.position.yaw = 3
-basestation.position.confidence = 4
-
-mark = c.data
-mark.Pack(basestation)
-
 # log file
 logging.basicConfig(
     level=logging.DEBUG,  # 指定日志记录级别为DEBUG及以上
@@ -31,7 +25,7 @@ logging.basicConfig(
 )
 
 ctx = zmq.Context()
-url = 'tcp://*:8004'
+url = 'tcp://*:8003'
 server = ctx.socket(zmq.REP)
 server.bind(url)
 
@@ -40,6 +34,16 @@ msg = c
 recv = Camera2RobotRequest()
 
 while True:
+    c.seq = c.seq + 1
+    c.error.flag = True
+    basestation.seq = basestation.seq + 1
+    #basestation.poses.pose.y2 = 2
+    #basestation.poses.pose.ts = 3
+    
+    mark = c.data
+    mark.Pack(basestation)
+
+
     msg_request = server.recv(copy=False)
 
     recv.ParseFromString(msg_request)
@@ -54,6 +58,7 @@ while True:
     msg.ts = time.time()
     serialized_msg = msg.SerializeToString()
     logging.debug('\n%s', msg)
+    print(basestation.seq)
     #print(serialized_msg)
     server.send(serialized_msg)
     time.sleep(0.1)
